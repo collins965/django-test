@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+
+<div class="min-h-screen bg-gradient-to-br from-indigo-950 to-gray-900 text-white flex items-center justify-center px-4 py-10">
+  <div class="bg-white text-gray-900 w-full max-w-lg p-8 rounded-2xl shadow-2xl">
+    
+    <h2 class="text-3xl font-bold mb-6 text-center text-indigo-700">Contact Us</h2>
+    
+    <p class="mb-6 text-sm text-center text-gray-600">
+      We'd love to hear from you. Please leave a message and we'll get back to you as soon as possible.
+    </p>
+
+    <form action="/submit" method="post" class="space-y-4">
+      {% csrf_token %}
+      
+      <div>
+        <label for="name" class="block font-semibold mb-1">Your Name</label>
+        <input type="text" id="name" name="name" required
+               class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div>
+        <label for="email" class="block font-semibold mb-1">Your Email</label>
+        <input type="email" id="email" name="email" required
+               class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div>
+        <label for="message" class="block font-semibold mb-1">Message</label>
+        <textarea id="message" name="message" rows="5" required
+                  class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+                class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">
+          Send Message
+        </button>
+      </div>
+    </form>
+
+    <!-- Optional: Contact Details -->
+    <div class="mt-8 text-sm text-gray-600">
+      <p><strong>Email:</strong> support@example.com</p>
+      <p><strong>Phone:</strong> +254 712 345 678</p>
+      <p><strong>Location:</strong> Nairobi, Kenya</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

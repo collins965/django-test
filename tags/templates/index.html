@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Learning Django Templates
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 text-white p-6 flex flex-col items-center">
+    
+    <h2 class="text-3xl font-bold mb-6 text-center">{{ message }}</h2>
+
+    <!-- Styled image -->
+    <div class="mb-8">
+        <img src="{% static 'moneyfest.jpeg' %}" alt="Moneyfest" 
+             class="rounded-2xl shadow-2xl border-4 border-white w-full max-w-md transition duration-300 hover:scale-105">
+    </div>
+
+    {% if user.is_authenticated %}
+        <p class="text-lg font-semibold bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
+            Welcome, {{ user.username }}!
+        </p>
+    {% else %}
+        <p class="text-lg bg-red-100 text-red-800 px-4 py-2 rounded mb-4">
+            Please log in to access this content.
+        </p>
+    {% endif %}
+
+    <!-- Item list -->
+    <ul class="bg-white text-gray-900 rounded-xl p-4 w-full max-w-md shadow-lg space-y-2">
+        {% for item in items %}
+            <li class="border-b border-gray-200 py-2">{{ item }}</li>
+        {% empty %}
+            <li class="text-gray-500">No items to display.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

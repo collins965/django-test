@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Filters
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white px-6 py-10">
+  <div class="max-w-4xl mx-auto space-y-8">
+
+    <h2 class="text-4xl font-bold text-center text-indigo-400 mb-8">Django Template Filters</h2>
+
+    <!-- Filter Card -->
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">String Filters</h3>
+      <p><strong>Original:</strong> {{ my_string }}</p>
+      <p><strong>Uppercase:</strong> {{ my_string|upper }}</p>
+      <p><strong>Length:</strong> {{ my_string|length }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Date Filter</h3>
+      <p><strong>Date:</strong> {{ my_date|date:"F j, Y" }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Truncate Characters</h3>
+      <p>{{ long_string|truncatechars:20 }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Default Filter</h3>
+      <p>{{ missing_value|default:"No value provided" }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Capfirst Filter</h3>
+      <p><strong>Original:</strong> {{ my_string }}</p>
+      <p><strong>Capfirst:</strong> {{ my_string|capfirst }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Join Filter</h3>
+      <p><strong>List:</strong> {{ list_items }}</p>
+      <p><strong>Joined (with dash):</strong> {{ list_items|join:" - " }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Slice Filter</h3>
+      <p><strong>Original:</strong> {{ my_string }}</p>
+      <p><strong>Slice (first 5 letters):</strong> {{ my_string|slice:":5" }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Wordcount Filter</h3>
+      <p><strong>Text:</strong> {{ words_string }}</p>
+      <p><strong>Word Count:</strong> {{ words_string|wordcount }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Linebreaks Filter</h3>
+      <p><strong>With linebreaks:</strong></p>
+      <p class="whitespace-pre-line">{{ multiline_text|linebreaks }}</p>
+    </div>
+
+    <div class="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Length Checker</h3>
+      <p><strong>String:</strong> {{ length }}</p>
+      <p><strong>Length:</strong> {{ length|length }}</p>
+
+      {% if length|length > 30 %}
+          <p class="mt-2 text-green-700 font-semibold">This string is long (more than 30 characters).</p>
+      {% else %}
+          <p class="mt-2 text-yellow-700 font-semibold">This string is short (30 characters or less).</p>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+🧠 Understanding Django’s MVT Architecture
+{% endblock %}
+
+{% block content %}
+<div class="flex flex-col min-h-screen bg-gradient-to-br from-indigo-950 to-gray-900 text-white">
+  <!-- Main content area -->
+  <main class="flex-grow flex items-center justify-center px-4 py-10">
+    <div class="max-w-5xl w-full bg-white/10 backdrop-blur-md text-white shadow-xl rounded-2xl p-8 md:p-12 animate-fade-in">
+
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-indigo-300 tracking-tight">
+        🧠 Understanding Django’s MVT Architecture
+      </h1>
+
+      <p class="mb-4 leading-relaxed text-lg">
+        When building web applications, developers often hear about Django and its powerful architecture. One of the key reasons Django is so developer-friendly is its use of the <strong class="text-indigo-200">MVT architecture</strong> — short for Model-View-Template.
+      </p>
+
+      <p class="mb-8 text-gray-300">
+        But what exactly is MVT, and how does it work? Let’s break it down.
+      </p>
+
+      <!-- What is MVT -->
+      <h2 class="text-3xl font-bold text-indigo-200 mb-4">🏗️ What is MVT?</h2>
+      <p class="mb-4">MVT is a design pattern used by Django to separate concerns in your application:</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border border-indigo-500 mb-6">
+          <thead class="bg-indigo-800 text-white">
+            <tr>
+              <th class="p-3 border border-indigo-700">Component</th>
+              <th class="p-3 border border-indigo-700">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-indigo-100">
+            <tr class="hover:bg-indigo-900">
+              <td class="p-3 border border-indigo-700 font-semibold">Model</td>
+              <td class="p-3 border border-indigo-700">Manages data and business logic (your database layer).</td>
+            </tr>
+            <tr class="hover:bg-indigo-900">
+              <td class="p-3 border border-indigo-700 font-semibold">View</td>
+              <td class="p-3 border border-indigo-700">Handles logic to process requests and return responses.</td>
+            </tr>
+            <tr class="hover:bg-indigo-900">
+              <td class="p-3 border border-indigo-700 font-semibold">Template</td>
+              <td class="p-3 border border-indigo-700">Deals with the presentation layer (HTML output shown to users).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote class="border-l-4 border-indigo-400 bg-indigo-800/20 p-4 italic mb-10 text-indigo-200">
+        This is Django’s version of the traditional MVC (Model-View-Controller) pattern — with a twist.
+      </blockquote>
+
+      <!-- MVT Flow -->
+      <h2 class="text-3xl font-bold text-indigo-200 mb-4">🧩 The MVT Flow in Action</h2>
+      <ol class="list-decimal list-inside space-y-1 mb-8 text-gray-200">
+        <li>A user visits <code>https://example.com/blog/</code></li>
+        <li>Django matches the URL to a view function</li>
+        <li>The view fetches blog posts from the model</li>
+        <li>The data is passed into a template</li>
+        <li>The rendered HTML is sent back to the browser</li>
+      </ol>
+
+      <!-- Components -->
+      <h2 class="text-3xl font-bold text-indigo-200 mb-4">🔍 Breaking Down Each Component</h2>
+
+      <h3 class="text-2xl text-indigo-300 font-semibold mb-2">🔹 1. Model</h3>
+      <p class="mb-2">Defined in <code>models.py</code>, a model represents a table in the database.</p>
+      <pre class="bg-black/40 text-green-300 rounded-md p-4 overflow-x-auto mb-6"><code>from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+</code></pre>
+
+      <h3 class="text-2xl text-indigo-300 font-semibold mb-2">🔹 2. View</h3>
+      <p class="mb-2">The view retrieves data and sends it to the template.</p>
+      <pre class="bg-black/40 text-green-300 rounded-md p-4 overflow-x-auto mb-6"><code>from django.shortcuts import render
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts})
+</code></pre>
+
+      <h3 class="text-2xl text-indigo-300 font-semibold mb-2">🔹 3. Template</h3>
+      <p class="mb-2">Templates are written in HTML with Django's templating language.</p>
+      <pre class="bg-black/40 text-yellow-300 rounded-md p-4 overflow-x-auto mb-10"><code>&lt;!-- blog/post_list.html --&gt;
+&lt;h1&gt;Blog Posts&lt;/h1&gt;
+{% templatetag openblock %} for post in posts {% templatetag closeblock %}
+  &lt;h2&gt;{{ post.title }}&lt;/h2&gt;
+  &lt;p&gt;{{ post.content }}&lt;/p&gt;
+{% templatetag openblock %} endfor {% templatetag closeblock %}
+</code></pre>
+
+      <!-- Why it matters -->
+      <h2 class="text-3xl font-bold text-indigo-200 mb-4">✅ Why MVT Matters</h2>
+      <ul class="list-disc list-inside space-y-2 mb-8 text-gray-300">
+        <li>🧹 <strong>Separation of concerns</strong>: Keeps your logic, data, and UI cleanly separated.</li>
+        <li>🚀 <strong>Faster development</strong>: Django takes care of most of the boring parts.</li>
+        <li>🔐 <strong>Secure & scalable</strong>: Security comes baked in.</li>
+      </ul>
+
+      <!-- Conclusion -->
+      <h2 class="text-3xl font-bold text-indigo-200 mb-4">🎯 Final Thoughts</h2>
+      <p class="mb-4">Django’s MVT architecture makes web development fast, efficient, and clean. By separating the <strong>model</strong> (data), <strong>view</strong> (logic), and <strong>template</strong> (presentation), Django helps you stay organized — especially as your project grows.</p>
+
+      <blockquote class="border-l-4 border-purple-400 bg-purple-800/20 p-4 italic mb-6 text-purple-200">
+        Want to see MVT in action? Try building a simple to-do app or blog — Django will take care of most of the heavy lifting for you.
+      </blockquote>
+
+      <p class="font-bold text-indigo-300 text-xl">Happy coding! 🧑‍💻✨</p>
+    </div>
+  </main>
+
+  <!-- Optional footer -->
+  <footer class="bg-indigo-950 text-center text-sm py-4 border-t border-indigo-800">
+    <p class="text-indigo-300">&copy; 2025 Django Academy. All rights reserved.</p>
+  </footer>
+</div>
+
+<!-- Optional animation -->
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out both;
+  }
+</style>
+{% endblock %}

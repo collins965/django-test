@@ -1,0 +1,22 @@
+<footer class="bg-gray-900 text-white py-6 mt-12">
+  <div class="container mx-auto px-4">
+    <ul class="flex flex-col md:flex-row justify-center gap-6 text-center text-sm">
+      <li>
+        <a href="{% url 'index' %}" class="hover:text-indigo-400 transition-colors duration-300">
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'contact' %}" class="hover:text-indigo-400 transition-colors duration-300">
+          Contact
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'about' %}" class="hover:text-indigo-400 transition-colors duration-300">
+          About
+        </a>
+      </li>
+    </ul>
+    <p class="mt-4 text-center text-xs text-gray-400">&copy; {{ year|default:"2025" }} My Website. All rights reserved.</p>
+  </div>
+</footer>
